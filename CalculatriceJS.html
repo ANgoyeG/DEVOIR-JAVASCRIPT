@@ -1,0 +1,136 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  <title>Calculatrice</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: rgb(0, 162, 255);
+      text-align: center;
+      margin: 20px;
+    }
+
+    h1 {
+      color: black;
+    }
+
+    form {
+      max-width: 400px;  
+      margin: 0 auto;
+      background-color: blanchedalmond;
+      padding: 25px;
+      border-radius: 15px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    label {
+      display: block;
+      margin-bottom: 10px;
+      color: black;
+    }
+
+    input {
+      width: 90%;  
+      padding: 10px;
+      margin-bottom :15px;
+      box-sizing: border-box;
+      border: 1px solid black; 
+      border-radius: 5px;
+    }
+
+    button {
+      background-color: red;
+      color: black;
+      padding: 10px 15px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: red;
+    }
+
+    #results {
+      width: 400px;  
+      margin: 0 auto;  
+      margin-top: 15px;
+      padding: 25px;
+      border: 1px solid blanchedalmond;
+      border-radius: 5px;
+      background-color: blanchedalmond;
+      box-shadow: 0 0 0 rgba(0, 0, 0, 0.1);
+      text-align: center;
+    }
+
+    .result-item {
+      border: 1px solid black;
+      border-radius: 5px;
+      padding: 8px;
+      margin-bottom: 8px;
+    }
+
+  </style>
+</head>
+<body>
+
+  <h1>CALCULATRICE JS</h1>
+
+  <form id="calculatorForm">
+         <label for="num1">Nombre 1:</label>
+         <input type="text" id="num1" name="num1" required pattern="[0-9]">
+
+         <label for="num2">Nombre 2:</label>
+         <input type="text" id="num2" name="num2" required pattern="[0-9]" oninput="validateInput()">
+ 
+         <button type="button" onclick="calculate()">Calculer</button>
+  </form>
+
+  <h2>Résultats :</h2>
+  <div id="results">
+          <div class="result-item" id="sumResult">Somme :</div>
+         <div class="result-item" id="multiplicationResult">Multiplication :</div>
+         <div class="result-item" id="divisionResult">Division :</div>
+         <div class="result-item" id="subtractionResult">Soustraction :</div>
+  </div>
+
+  <script>
+         function calculate() {
+             var num1 = parseFloat(document.getElementById('num1').value);
+             var num2 = parseFloat(document.getElementById('num2').value);
+
+            if (isNaN(num1) || isNaN(num2)) {
+              alert("Veuillez saisir des nombres valides.");
+             return;
+            }
+
+            if (num2 === 0) {
+               alert("Division par zéro non autorisée.");
+              return;
+            }
+
+             var sum = num1 + num2;
+             var multiplication = num1 * num2;
+             var division = num1 / num2;
+             var subtraction = num1 - num2;
+
+             document.getElementById('sumResult').innerHTML = `Somme : ${sum}`;
+             document.getElementById('multiplicationResult').innerHTML = `Multiplication : ${multiplication}`;
+             document.getElementById('divisionResult').innerHTML = `Division : ${division}`;
+             document.getElementById('subtractionResult').innerHTML = `Soustraction : ${subtraction}`;
+        }
+
+    function validateInput() {
+             var num2Input = document.getElementById('num2');
+           if (num2Input.value === '0') {
+              num2Input.setCustomValidity("Le deuxième nombre ne peut pas être 0.");
+           } else {
+        num2Input.setCustomValidity("");
+      }
+    }
+  </script>
+
+</body>
+</html>
